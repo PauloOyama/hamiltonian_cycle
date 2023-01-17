@@ -4,27 +4,23 @@ path = []
 '''
 Verifica se o vertice nao esta no caminho ja
 '''
-def safeVertex(node):
+def temCiclo(node):
     if(node in path):
         return False
     
     return True     
 
 #-------------------------------------------
-'''
-Defining our DFS and 
-Backtracking Logic
-'''
 
-def cycleDetection(E,n,root):
+def DetectaCiclo(E,n,root):
     path.append(root)
     #Vendo todos os vizinhos da raiz
 
     for i in E[root]:
         #Checa se o vertex nao esta no path ja
-        if(safeVertex(i)):
+        if(temCiclo(i)):
             #Senao, pula para o filho e faz a mesma coisa com ele
-            if(cycleDetection(E,n,i)):
+            if(DetectaCiclo(E,n,i)):
                 return True
     
     #Tem todos os vertices ?
@@ -44,8 +40,8 @@ def cycleDetection(E,n,root):
 Retorna True or False, tendo em vista uma detectacao de ciclo
 '''
 
-def HamiltonianCycle(E,n,root):
-    if(cycleDetection(E,n,root)):
+def cicloHamiltoniano(E,n,root):
+    if(DetectaCiclo(E,n,root)):
         return True, path
     else:
         return False, path

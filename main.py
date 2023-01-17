@@ -1,8 +1,8 @@
 import random    
 from pyvis.network import Network
-from hamiltonian_cycle import HamiltonianCycle
+from hamiltonian_cycle import cicloHamiltoniano
 
-net = Network(cdn_resources="remote" )
+net = Network(notebook=True,cdn_resources="remote" )
 
 bairros = ["Centro",
     "Fundinho",
@@ -85,9 +85,11 @@ bairros = ["Centro",
 
 path = []
 
-N_Vertices = random.randint(10,(len(bairros) -1))
+N_Vertices = random.randint(10, 25)
 
 E_number = random.randint(25,75)
+
+print(N_Vertices, E_number)
 
 matrix = list()
 
@@ -125,7 +127,7 @@ net.show(name='graph.html')
 
 #------------------------------------------
 
-hasHamilton, path = HamiltonianCycle(matrix,N_Vertices,0)
+hasHamilton, path = cicloHamiltoniano(matrix,N_Vertices,0)
 
 print(hasHamilton)
 if hasHamilton:
