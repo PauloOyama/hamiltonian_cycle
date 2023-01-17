@@ -1,0 +1,51 @@
+path = []
+
+#------------------------------------------
+'''
+Verifica se o vertice nao esta no caminho ja
+'''
+def safeVertex(node):
+    if(node in path):
+        return False
+    
+    return True     
+
+#-------------------------------------------
+'''
+Defining our DFS and 
+Backtracking Logic
+'''
+
+def cycleDetection(E,n,root):
+    path.append(root)
+    #Vendo todos os vizinhos da raiz
+
+    for i in E[root]:
+        #Checa se o vertex nao esta no path ja
+        if(safeVertex(i)):
+            #Senao, pula para o filho e faz a mesma coisa com ele
+            if(cycleDetection(E,n,i)):
+                return True
+    
+    #Tem todos os vertices ?
+    if(len(path) == n):
+        # Se tem todos os vertices, o primeiro e o ultimo sao os mesmo ?
+        # Se sim, eh um ciclo
+        if(path[0] in E[path[len(path)-1]]):
+            return True 
+        else:
+            return False
+    
+    path.pop()
+
+#-------------------------------------------    
+
+'''
+Retorna True or False, tendo em vista uma detectacao de ciclo
+'''
+
+def HamiltonianCycle(E,n,root):
+    if(cycleDetection(E,n,root)):
+        return True, path
+    else:
+        return False, path
